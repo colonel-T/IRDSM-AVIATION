@@ -66,8 +66,7 @@
 
 
         <div id="form" class="container">
-            <form id="regForm" [formGroup]="admissionForm" (ngSubmit)="submitAdmission()" method="post" action=""
-                autocomplete="off">
+            <form id="regForm" [formGroup]="admissionForm" (ngSubmit)="submitAdmission()" method="post" action="">
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
 
@@ -128,6 +127,51 @@
                             <option *ngFor="let n of nEtude" value="{{n.name}}">{{ n.name }} </option>
                         </select>
                     </p>
+
+                    <b>{{ 'admission.typediplome'|translate }}</b><span class="star_required">*</span>
+                    <p>
+                        <select formControlName="typediplome" id="monselect">
+                            <option value="aucun">Aucun - basique - général </option>
+                            <option value="scientifique">Scientifique </option>
+                            <option value="litteraire">Litteraire </option>
+                            <option value="technique">Technique </option>
+                            <option value="spécialisé">Spécialisé (Bac +2 et plus) </option>
+
+                        </select>
+                    </p>
+
+                    <b>{{ 'admission.frequente'|translate }}</b>
+                    <p>
+                        <select formControlName="frequente" id="monselect">
+                            <option value="oui">Oui</option>
+                            <option value="non">Non </option>
+                        </select>
+                    </p>
+
+                    <b>{{ 'admission.typeProgram'|translate }}</b>
+                    <p>
+                        <select formControlName="typeProgram" id="monselect">
+                            <option value="temps_partiel">Temps partiel </option>
+                            <option value="temps_plein">Temps plein </option>
+                        </select>
+                    </p>
+
+                    <b>{{ 'admission.activite'|translate }}</b><span class="star_required">*</span>
+                    <p>
+                        <select formControlName="activite" id="monselect">
+                            <option value="non">Non </option>
+                            <option value="oui">Oui </option>
+
+                        </select>
+                    </p>
+
+                    <b>{{ 'admission.ouiActivite'|translate }}</b>
+                    <p>
+                        <input formControlName="ouiActivite" placeholder="Commerce, Marketing, RH, Finance" type="text"
+                            name="ouiActivite">
+                    </p>
+
+
 
                 </div>
                 <div class="tab">

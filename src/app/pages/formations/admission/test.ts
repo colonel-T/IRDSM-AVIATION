@@ -133,11 +133,16 @@ export class AdmissionComponent implements OnInit {
   addAdmissionForm() {
     this.admissionForm = this.formBuilder.group({
       program: ['Hôtesse de l’air / stewards', Validators.required],
-      concours: ["Concours du 25 Mai 2024", Validators.required],
+      concours: ["Concours du 27 Avril 2024", Validators.required],
       fname: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       ville: ['', Validators.required],
+      typediplome: ['aucun', Validators.required],
+      activite: ['non', Validators.required],
+      ouiActivite: [''],
+      frequente: ['oui', Validators.required],
+      typeProgram: ['temps_partiel', Validators.required],
       sexe: ['F', Validators.required],
       age: ['', Validators.required],
       diplome: ['Baccalauréat ou Equivalent', Validators.required],
@@ -198,6 +203,5 @@ export class AdmissionComponent implements OnInit {
       }
     );
   }
-
 
 }
