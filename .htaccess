@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^irdsm-aviation.com [NC]
+RewriteRule ^(.*)$ https://www.irdsm-aviation.com/$1 [L,R=301]
