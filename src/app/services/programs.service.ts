@@ -8,11 +8,32 @@ export class ProgramsService {
 
 
   programsSubject = new Subject<any[]>();
+
+  eventsSubject = new Subject<any[]>();
+
+  dateEventsSubject = new Subject<any[]>();
+
   dateCompSubject = new Subject<any[]>();
+
   nEtudeSubject = new Subject<any[]>();
 
 
   constructor() { }
+
+
+  events = [
+    {
+      name: "Ateliers Pratiques Vacances",
+      duration: 1
+    }
+  ]
+
+  dateEvents = [
+    {
+      code: "200724",
+      name: "Évènement du 01 au 31 Août 2024",
+    }
+  ];
 
   programs = [
     {
@@ -141,6 +162,20 @@ export class ProgramsService {
     }
   ];
 
+  nEtduteEvent = [
+    {
+      code: "Primaire",
+      name: "Primaire",
+    },
+    {
+      code: "Secondaire1",
+      name: "Secondaire - 1er Cycle",
+    }, {
+      code: "Secondaire2",
+      name: "Secondaire - 2e Cycle",
+    }
+
+  ];
 
   nEtdute = [
     {
@@ -179,6 +214,14 @@ export class ProgramsService {
 
   emitnEtudeSubject() {
     this.nEtudeSubject.next(this.nEtdute.slice());
+  }
+
+  emitEventsSubject() {
+    this.eventsSubject.next(this.events.slice());
+  }
+
+  emitDateEventsSubject() {
+    this.dateEventsSubject.next(this.dateEvents.slice());
   }
 
 }

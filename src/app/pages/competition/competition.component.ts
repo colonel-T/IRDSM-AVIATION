@@ -5,18 +5,17 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProgramsService } from 'src/app/services/programs.service';
-import { GlobalConstants } from '../../../common/global-constants';
+import { GlobalConstants } from '../../common/global-constants';
 import { CompetitionService } from 'src/app/services/competition/competition.service';
 import { Competition } from 'src/app/models/competition';
 
-
 @Component({
-  selector: 'app-admission',
-  templateUrl: './admission.component.html',
-  styleUrls: ['./admission.component.scss']
+  selector: 'app-competition',
+  templateUrl: './competition.component.html',
+  styleUrls: ['./competition.component.scss']
 })
-export class AdmissionComponent implements OnInit {
 
+export class CompetitionComponent {
   isLoadingForm: boolean = true;
 
   competitions: Competition;
@@ -133,16 +132,11 @@ export class AdmissionComponent implements OnInit {
   addAdmissionForm() {
     this.admissionForm = this.formBuilder.group({
       program: ['Hôtesse de l’air / stewards', Validators.required],
-      concours: ["Concours du 27 Avril 2024", Validators.required],
+      concours: ["Concours du 20 Juillet 2024", Validators.required],
       fname: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       ville: ['', Validators.required],
-      typediplome: ['aucun', Validators.required],
-      activite: ['non', Validators.required],
-      ouiActivite: [''],
-      frequente: ['oui', Validators.required],
-      typeProgram: ['temps_partiel', Validators.required],
       sexe: ['F', Validators.required],
       age: ['', Validators.required],
       diplome: ['Baccalauréat ou Equivalent', Validators.required],
@@ -203,5 +197,4 @@ export class AdmissionComponent implements OnInit {
       }
     );
   }
-
 }

@@ -1,40 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { GlobalConstants } from 'src/app/common/global-constants';
+import { Events } from 'src/app/models/events';
 import { ProgramsService } from 'src/app/services/programs.service';
-import { GlobalConstants } from '../../../common/global-constants';
-import { CompetitionService } from 'src/app/services/competition/competition.service';
-import { Competition } from 'src/app/models/competition';
-
 
 @Component({
-  selector: 'app-admission',
-  templateUrl: './admission.component.html',
-  styleUrls: ['./admission.component.scss']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.scss']
 })
-export class AdmissionComponent implements OnInit {
-
+export class EventsComponent {
   isLoadingForm: boolean = true;
 
-  competitions: Competition;
-  competitionSuscription: Subscription | undefined
+  events: Events[];
 
-  selectedCompetition: any = undefined
+  eventsSuscription: Subscription | undefined
 
-  listConcours: any[] | undefined
+  selectedEvents: any = undefined
 
-  programs: any[] | undefined;
+  listEvents: any[] | undefined
 
-  dateComp: any[] | undefined;
+  dateEvent: any[] | undefined;
 
   nEtude: any[] | undefined;
 
-  admissionConfirmation: boolean = false
+  eventConfirmation: boolean = false
 
-  admissionForm!: FormGroup;
+  eventForm!: FormGroup;
 
   private baseUrl = GlobalConstants.apiURL;
 
@@ -46,25 +42,22 @@ export class AdmissionComponent implements OnInit {
     private http: HttpClient,
     private programService: ProgramsService,
     private router: Router,
-    public competitionService: CompetitionService,
     private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
 
-    this.title.setTitle("IRDSM AVIATION - Admission En Ligne");
+    this.title.setTitle("IRDSM AVIATION - Inscription Évènement En Ligne");
 
-    this.storePrograms();
+    this.storeEvents();
 
-    this.storeDateCompetition();
+    console.log(this.events)
 
-    this.storeNEtude();
+    this.storeDateEvent();
 
-    //this.storeCompetition()
+    this.storeNEtudeEvent();
 
-    this.addAdmissionForm();
-    console.log(this.isLoadingForm)
-
+    this.addEventForm();
 
     this.loadScript('../assets/js/jquery.js');
 
@@ -104,73 +97,74 @@ export class AdmissionComponent implements OnInit {
 
     if (!$('input[name="cF"]').is(':checked')) {
 
-      this.admissionForm.controls['cF'].setValue(true)
+      this.eventForm.controls['cF'].setValue(true)
 
       $('input[name="cF"]').prop('checked', true);
 
     } else {
 
-      this.admissionForm.controls['cF'].setValue(false)
+      this.eventForm.controls['cF'].setValue(false)
 
       $('input[name="cF"]').prop('checked', false);
 
     }
   }
 
-  storePrograms() {
-    this.programs = this.programService.programs;
+  storeEvents() {
+    this.events = this.programService.events;
   }
 
-  storeDateCompetition() {
-    this.dateComp = this.programService.dateComp;
-    this.selectedCompetition = this.dateComp[0].name
+  storeDateEvent() {
+    this.dateEvent = this.programService.dateEvents;
+    this.selectedEvents = this.dateEvent[0].name
   }
 
-  storeNEtude() {
-    this.nEtude = this.programService.nEtdute;
+  storeNEtudeEvent() {
+    this.nEtude = this.programService.nEtduteEvent;
   }
 
-  addAdmissionForm() {
-    this.admissionForm = this.formBuilder.group({
-      program: ['Hôtesse de l’air / stewards', Validators.required],
-      concours: ["Concours du 20 Juillet 2024", Validators.required],
+  addEventForm() {
+    this.eventForm = this.formBuilder.group({
+      events: ['Ateliers Pratiques Vacances', Validators.required],
+      dateEvents: ["Évènement du 01 au 31 Août 2024", Validators.required],
+
       fname: ['', Validators.required],
-      email: ['', Validators.required],
       phone: ['', Validators.required],
       ville: ['', Validators.required],
       sexe: ['F', Validators.required],
+
       age: ['', Validators.required],
-      diplome: ['Baccalauréat ou Equivalent', Validators.required],
+      etude: ['Primaire', Validators.required],
       center: ['Yaoundé - Mballa 2', Validators.required],
       cF: ['', Validators.required],
     });
 
   }
 
-  submitAdmission() {
+  submitEvent() {
     $('.body-inner').hide();
     $('#loading').css('visibility', 'visible');
 
 
     let dateCreation = new Date()
 
-    let responseForm = this.admissionForm.value
+    let responseForm = this.eventForm.value
 
     responseForm['dateCreation'] = dateCreation
 
-    //console.log(responseForm)
+    console.log(responseForm)
 
     this.http
-      .post<any[]>(`${this.baseUrl}/submission/add-admission`, responseForm)
+      .post<any[]>(`${this.baseUrl}/submission/add-event`, responseForm)
       .subscribe(
         (response) => {
 
           $('#loading').css('visibility', 'hidden');
           $('.body-inner').show();
           $('.admission_success').show();
-          this.admissionForm.reset();
+          this.eventForm.reset();
 
-          this.admissionConfirmation = !this.admissionConfirmation
+          this.eventConfirmation = !this.eventConfirmation
 
           setTimeout(function () {
 
@@ -187,17 +181,5 @@ export class AdmissionComponent implements OnInit {
 
 
   }
-
-  storeCompetition() {
-    this.competitionService.getList()
-    this.competitionSuscription = this.competitionService.competitionSubject.subscribe(
-      (competition: Competition[]) => {
-        this.competitions = competition[competition.length - 1]
-        this.selectedCompetition = this.competitions.name
-        this.cdr.detectChanges();
-      }
-    );
-  }
-
 
 }

@@ -4,17 +4,17 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-formations',
-  templateUrl: './formations.component.html',
-  styleUrls: ['./formations.component.scss']
+  templateUrl: './formation.component.html',
+  styleUrls: ['./formation.component.scss']
 })
-export class FormationsComponent implements OnInit {
+export class FormationComponent implements OnInit {
 
   constructor(
     private title: Title
   ) { }
 
-  ngOnInit(){   
-    
+  ngOnInit() {
+
     this.title.setTitle("IRDSM AVIATION - Formations");
 
     this.loadScript('../assets/js/jquery.js');
@@ -24,7 +24,7 @@ export class FormationsComponent implements OnInit {
   }
 
   public loadScript(url: string) {
-    const body = <HTMLDivElement> document.body;
+    const body = <HTMLDivElement>document.body;
     const script = document.createElement('script');
     script.innerHTML = '';
     script.src = url;

@@ -2,7 +2,7 @@
     <img src="assets/images/animations/Dual-Ball-1s-200px.svg" style="width: 60px; height:60px;">
 </div>
 
-<div id="flash_message_success" class="admission_success"><i class="fas fa-check"></i> Votre Admission a été envoyé
+<div id="flash_message_success" class="admission_success"><i class="fas fa-check"></i> Votre Inscription a été envoyé
 </div>
 
 
@@ -39,7 +39,7 @@
             <div class="container">
                 <div class="slide-captions text-center text-light">
                     <!-- Captions -->
-                    <h1>{{ 'admission.title'|translate }}</h1>
+                    <h1>Évènements</h1>
                     <!-- end: Captions -->
                 </div>
             </div>
@@ -49,14 +49,17 @@
     </div>
     <!--end: Inspiro Slider -->
 
-    <div *ngIf="!admissionConfirmation">
+    <div *ngIf="!eventConfirmation">
 
         <section>
             <div class="container">
                 <div class="heading-text heading-section text-center">
                     <h2>{{ 'admission.begin'|translate }}</h2>
 
-                    NB : {{ 'admission.nb'|translate }}
+                    NB : En remplissant ce formulaire, vous acceptez que nous stockons vos données pour pouvoir les
+                    traiter afin de mieux vous comprnedre et d'être contacter par IRDSM-AVIATION pour avoir plus
+                    d'information sur les modalités de l'évènement et accepter une prise de rendez-vous dans nos
+                    campus.
 
                 </div>
 
@@ -66,21 +69,22 @@
 
 
         <div id="form" class="container">
-            <form id="regForm" [formGroup]="admissionForm" (ngSubmit)="submitAdmission()" method="post" action="">
+            <form id="regForm" [formGroup]="eventForm" (ngSubmit)="submitEvent()" method="post" action=""
+                autocomplete="off">
                 <!-- One "tab" for each step in the form: -->
                 <div class="tab">
 
-                    <b>{{ 'admission.select_prog'|translate }}</b><span class="star_required">*</span>
+                    <b>Choix de l'évènement</b><span class="star_required">*</span>
                     <p>
-                        <select formControlName="program" id="monselect">
-                            <option *ngFor="let p of programs" value="{{p.name}}">{{ p.name }} </option>
+                        <select formControlName="events" id="monselect">
+                            <option *ngFor="let ev of events" value="{{ev.name}}">{{ ev.name }} </option>
                         </select>
                     </p>
 
-                    <b>{{ 'admission.re-entry'|translate }}</b><span class="star_required">*</span>
+                    <b>Date de l'évènement</b><span class="star_required">*</span>
                     <p>
-                        <select formControlName="concours" id="monselect" [(ngModel)]="selectedCompetition">
-                            <option *ngFor="let d of dateComp" value="{{d?.name}}">{{ d?.name }} </option>
+                        <select formControlName="dateEvents" id="monselect" [(ngModel)]="selectedEvents">
+                            <option *ngFor="let d of dateEvent" value="{{d?.name}}">{{ d?.name }} </option>
                         </select>
                     </p>
 
@@ -92,9 +96,7 @@
                     <p><input formControlName="fname" placeholder="{{ 'admission.fullname'|translate }}"
                             oninput="this.className = ''" name="name"></p>
 
-                    <b>{{ 'admission.email'|translate }}</b><span class="star_required">*</span>
-                    <p><input formControlName="email" placeholder="{{ 'admission.email'|translate }}:"
-                            oninput="this.className = ''" name="email"></p>
+
 
                     <b>{{ 'admission.phone'|translate }}</b><span class="star_required">*</span>
                     <p><input formControlName="phone" placeholder="{{ 'admission.phone'|translate }}"
@@ -121,57 +123,12 @@
 
                     <h4>{{ 'admission.etude'|translate }}</h4>
 
-                    <b>{{ 'admission.diplome'|translate }}</b><span class="star_required">*</span>
+                    <b>Niveau Scolaire</b><span class="star_required">*</span>
                     <p>
-                        <select formControlName="diplome" id="monselect">
+                        <select formControlName="etude" id="monselect">
                             <option *ngFor="let n of nEtude" value="{{n.name}}">{{ n.name }} </option>
                         </select>
                     </p>
-
-                    <b>{{ 'admission.typediplome'|translate }}</b><span class="star_required">*</span>
-                    <p>
-                        <select formControlName="typediplome" id="monselect">
-                            <option value="aucun">Aucun - basique - général </option>
-                            <option value="scientifique">Scientifique </option>
-                            <option value="litteraire">Litteraire </option>
-                            <option value="technique">Technique </option>
-                            <option value="spécialisé">Spécialisé (Bac +2 et plus) </option>
-
-                        </select>
-                    </p>
-
-                    <b>{{ 'admission.frequente'|translate }}</b>
-                    <p>
-                        <select formControlName="frequente" id="monselect">
-                            <option value="oui">Oui</option>
-                            <option value="non">Non </option>
-                        </select>
-                    </p>
-
-                    <b>{{ 'admission.typeProgram'|translate }}</b>
-                    <p>
-                        <select formControlName="typeProgram" id="monselect">
-                            <option value="temps_partiel">Temps partiel </option>
-                            <option value="temps_plein">Temps plein </option>
-                        </select>
-                    </p>
-
-                    <b>{{ 'admission.activite'|translate }}</b><span class="star_required">*</span>
-                    <p>
-                        <select formControlName="activite" id="monselect">
-                            <option value="non">Non </option>
-                            <option value="oui">Oui </option>
-
-                        </select>
-                    </p>
-
-                    <b>{{ 'admission.ouiActivite'|translate }}</b>
-                    <p>
-                        <input formControlName="ouiActivite" placeholder="Commerce, Marketing, RH, Finance" type="text"
-                            name="ouiActivite">
-                    </p>
-
-
 
                 </div>
                 <div class="tab">
@@ -181,9 +138,7 @@
                     <p>
                         <select formControlName="center" id="monselect">
                             <option value="Yaoundé - Mballa 2">Yaoundé - Mballa 2 </option>
-                            <option value="Douala - Feu Rouge Bessengue">Douala - Feu Rouge Bessengue. </option>
-                            <option value="Bafoussam - Institut Supérieur Tankou">Bafoussam - Institut Supérieur Tankou.
-                            </option>
+
                         </select>
                     </p>
 
@@ -203,7 +158,7 @@
                         &nbsp;
                         <button type="button" id="nextBtn" onclick="nextPrev(1)">{{ 'admission.next'|translate
                             }}</button>
-                        <button [disabled]="admissionForm.invalid" id="submit" type="submit" style="display: none;"> {{
+                        <button [disabled]="eventForm.invalid" id="submit" type="submit" style="display: none;"> {{
                             'admission.submit'|translate }}</button>
 
                     </div>
@@ -221,19 +176,13 @@
     </div>
 
 
-    <section *ngIf="admissionConfirmation" class="admission_confirmation">
+    <section *ngIf="eventConfirmation" class="admission_confirmation">
         <div class="container">
             <div class="heading-text heading-section text-center">
-                <h2> <img src="assets/images/forms/success/check.png" alt="check" class="check"> {{
-                    'admission.admission_sent'|translate }}
+                <h2> <img src="assets/images/forms/success/check.png" alt="check" class="check"> Confirmation
+                    d'inscription
                 </h2>
             </div>
-
-            <p>
-                {{ 'admission.check_mail'|translate}}
-                Veuillez consulter vos mails afin de voir le récapitulatif de vos informations transmises à
-                l'administration
-            </p>
             <br>
             <button type="button" routerLink="/formation" class="btn btn-dark">{{ 'formation.title'|translate
                 }}</button>

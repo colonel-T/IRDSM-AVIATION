@@ -15,7 +15,6 @@ import { LanguageComponent } from './static/language/language.component';
 import { MenuComponent } from './static/menu/menu.component';
 import { ScrollTopComponent } from './static/scroll-top/scroll-top.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import ngx-translate and the http loader
@@ -23,17 +22,17 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LocaleService } from './services/locale.service';
-import { FormationsComponent } from './pages/formations/formations.component';
 import { NewsletterComponent } from './pages/newsletter/newsletter.component';
 import { PiloteComponent } from './pages/pilote/pilote.component';
-import { AdmissionComponent } from './pages/formations/admission/admission.component';
 import { PageTitleComponent } from './static/page-title/page-title.component';
-import { MaterialExampleModule } from 'material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolytechniqueComponent } from './pages/polytechnique/polytechnique.component';
 import { AdmissionPolytechniqueComponent } from './pages/polytechnique/admission-polytechnique/admission-polytechnique.component';
 import { FormationPolytechniqueComponent } from './pages/polytechnique/formation-polytechnique/formation-polytechnique.component';
-
+import { FormationComponent } from './pages/formation/formation.component';
+import { CompetitionComponent } from './pages/competition/competition.component';
+import { EventsService } from './services/events/events.service';
+import { EventsComponent } from './pages/events/events.component';
 
 @NgModule({
   declarations: [
@@ -49,14 +48,15 @@ import { FormationPolytechniqueComponent } from './pages/polytechnique/formation
     LanguageComponent,
     MenuComponent,
     ScrollTopComponent,
-    FormationsComponent,
     NewsletterComponent,
     PiloteComponent,
-    AdmissionComponent,
     PageTitleComponent,
     PolytechniqueComponent,
     AdmissionPolytechniqueComponent,
-    FormationPolytechniqueComponent
+    FormationPolytechniqueComponent,
+    FormationComponent,
+    CompetitionComponent,
+    EventsComponent,
 
   ],
   imports: [
@@ -77,7 +77,7 @@ import { FormationPolytechniqueComponent } from './pages/polytechnique/formation
 
   ],
   providers: [
-    LocaleService,
+    LocaleService, EventsService
   ],
   bootstrap: [AppComponent]
 })
