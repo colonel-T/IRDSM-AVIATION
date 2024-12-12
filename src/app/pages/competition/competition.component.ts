@@ -132,7 +132,7 @@ export class CompetitionComponent {
   addAdmissionForm() {
     this.admissionForm = this.formBuilder.group({
       program: ['Hôtesse de l’air / stewards', Validators.required],
-      concours: ["Concours du 19 Octobre 2024", Validators.required],
+      concours: ["18 Janvier 2025", Validators.required],
       fname: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
