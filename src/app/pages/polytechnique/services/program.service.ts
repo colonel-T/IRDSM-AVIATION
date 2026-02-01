@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProgramService {
-
   programsSubject = new Subject<any[]>();
   dateCompSubject = new Subject<any[]>();
   nEtudeSubject = new Subject<any[]>();
 
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   programs = [
     {
@@ -125,7 +124,7 @@ export class ProgramService {
   ];
 
 
-  nEtdute = [
+  nEtude = [
     {
       code: "M",
       name: "Master ou Equivalent",
@@ -161,7 +160,25 @@ export class ProgramService {
   }
 
   emitnEtudeSubject() {
-    this.nEtudeSubject.next(this.nEtdute.slice());
+    this.nEtudeSubject.next(this.nEtude.slice());
   }
 
+  getDateCompetitions(): Observable<any[]> {
+    // Replace with your actual API endpoint or static data
+    // Example with static data:
+    return of([
+      { name: 'Concours 2024', date: '2024-06-01' },
+      { name: 'Concours 2025', date: '2025-06-01' }
+    ]);
+    // Or, if using an API:
+    // return this.http.get<any[]>('your-api-endpoint/date-competitions');
+  }
+
+  getNEtude(): Observable<any[]> {
+    // ...existing or similar implementation...
+    return of([
+      { name: 'Licence' },
+      { name: 'Master' }
+    ]);
+  }
 }

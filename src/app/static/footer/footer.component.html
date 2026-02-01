@@ -1,56 +1,103 @@
-<!-- Footer -->
-<footer id="footer">
-    <div class="footer-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="icon-clock"></i></a>
-                        </div>
-                        <h3>{{ 'footer.horaire_travail' | translate }} </h3>
-                        <p><strong>{{ 'footer.lundi' | translate }} - {{ 'footer.vendredi' | translate }}</strong>
-                            <br>08:00 - 16:00</p>
-                        <p><strong>{{ 'footer.samedi' | translate }}</strong>
-                            <br>09:00 - 13:00</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="fas fa-map-marker-alt"></i></a>
-                        </div>
-                        <h3>{{ 'footer.location' | translate }}</h3>
-                        <p><strong>{{ 'footer.adresse' | translate }}:</strong>
-                            <br> {{ localisation }}
-                            <br>
-                            <br>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="icon-phone"></i></a>
-                        </div>
-                        <h3>{{ 'footer.contact' | translate }}</h3>
-                        <p><strong>{{ 'footer.contact' | translate }}:</strong>
-                            <br>{{ phone1 }}
-                            <br>{{ phone2 }}
-                        </p>
-                        <p><strong>{{ 'footer.mail' | translate }}:</strong>
-                            <br>{{ email }}
-                            
-                        </p>
-                    </div>
-                </div>
+<!-- Footer Aviation -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<footer id="footer" class="footer-aviation">
+  <div class="footer-content">
+    <div class="container">
+      <div class="row gy-4">
+
+        <!-- Horaires -->
+        <div class="col-md-4">
+          <div class="footer-box text-center">
+            <div class="footer-icon">
+              <i class="fas fa-plane-departure"></i>
             </div>
+            <h4>{{ 'footer.horaire_travail' | translate }}</h4>
+            <p>
+              <strong>{{ 'footer.lundi' | translate }} – {{ 'footer.vendredi' | translate }}</strong><br>
+              08:00 – 17:00
+            </p>
+            <p>
+              <strong>{{ 'footer.samedi' | translate }}</strong><br>
+              08:00 – 14:00
+            </p>
+          </div>
         </div>
+
+        <!-- Localisations -->
+<div class="col-md-4">
+  <div class="footer-box text-center">
+    <div class="footer-icon">
+      <i class="fas fa-map-marked-alt"></i>
     </div>
-    <div class="copyright-content">
-        <div class="container">
-            <div class="copyright-text text-center">&copy; {{ year }} {{ appname }} - {{ 'footer.title' | translate }}. {{ 'footer.copyright' | translate }} - v {{ version }} </div>
+    <h4>{{ 'footer.location' | translate }}</h4>
+
+    <div *ngFor="let loc of locations" class="location-compact">
+      <p>
+      📍 <strong>{{ loc.city }}</strong><br>
+      <span style="white-space: pre-line;">
+        {{ loc.address }}
+      </span>
+    </p>
+
+
+      <a
+        [href]="loc.mapLink"
+        target="_blank"
+        rel="noopener"
+        class="map-link"
+      >
+        Voir sur Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Contact -->
+        <div class="col-md-4">
+          <div class="footer-box text-center">
+            <div class="footer-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h4>{{ 'footer.contact' | translate }}</h4>
+            <p>
+              📞 {{ phone1 }}<br>
+              📞 {{ phone2 }}
+            </p>
+            <p>
+              ✉️ <a href="mailto:{{ email }}">{{ email }}</a>
+            </p>
+          </div>
         </div>
+
+      </div>
+
+      <!-- Réseaux sociaux dynamiques -->
+      <div class="row mt-4">
+        <div class="col text-center">
+          <div class="footer-socials">
+            <a *ngFor="let social of socialLinks"
+               [href]="social.url"
+               target="_blank"
+               rel="noopener"
+               [attr.aria-label]="social.name">
+              <i [class]="social.icon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright-content">
+    <div class="container">
+      <div class="copyright-text text-center">
+        © {{ year }} <strong>{{ appname }}</strong><br>
+        {{ 'footer.title' | translate }} · {{ 'footer.copyright' | translate }}
+      </div>
+    </div>
+  </div>
 </footer>
 <!-- end: Footer -->

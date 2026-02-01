@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ProgramService } from 'src/app/pages/polytechnique/services/program.service';
+
+import { ProgramService } from '../services/program.service';
+import { AdmissionService } from 'src/app/services/admission.service';
 import { GlobalConstants } from '../../../common/global-constants';
-
-
 
 @Component({
   selector: 'app-admission-polytechnique',
@@ -16,148 +13,81 @@ import { GlobalConstants } from '../../../common/global-constants';
 })
 export class AdmissionPolytechniqueComponent implements OnInit {
 
-  programs: any[] | undefined;
-
-  dateComp: any[] | undefined;
-
-  nEtude: any[] | undefined;
-
-  admissionConfirmation: boolean = false
-
   admissionForm!: FormGroup;
 
-  private baseUrl = GlobalConstants.apiURL;
+  programs: any[] = [];
+  dateComp: any[] = [];
+  nEtude: any[] = [];
 
-  programsSubscription: Subscription | undefined;
+  loading = false;
+  successMessage = false;
+  admissionConfirmation = false;
 
   constructor(
+    private fb: FormBuilder,
+    private admissionService: AdmissionService,
     private title: Title,
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private programService: ProgramService,
-    private router: Router
-  ) { }
+    private programService: ProgramService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.title.setTitle('IFP POLYTECHNIQUE - Admission En Ligne');
 
-    this.title.setTitle("IFP POLYTECHNIQUE - Admission En Ligne");
-
-    this.storePrograms();
-
-    this.storeDateCompetition();
-
-    this.storeNEtude();
-
-    this.addAdmissionForm();
-
-    this.loadScript('../assets/js/jquery.js');
-
-    this.loadScript('../assets/js/plugins.js');
-
-    this.loadScript('../assets/js/functions.js');
-
-    this.loadScript('../assets/js/form.js');
-
-    this.loadScript('https://code.iconify.design/1/1.0.7/iconify.min.js');
-  }
-
-  public loadScript(url: string) {
-    const body = <HTMLDivElement>document.body;
-
-    const script = document.createElement('script');
-
-    script.innerHTML = '';
-
-    script.src = url;
-
-    script.async = false;
-
-    script.defer = true;
-
-    body.appendChild(script);
-  }
-
-  clickConfirmationForm() {
-
-    if (!$('input[name="cF"]').is(':checked')) {
-
-      this.admissionForm.controls['cF'].setValue(true)
-
-      $('input[name="cF"]').prop('checked', true);
-
-    } else {
-
-      this.admissionForm.controls['cF'].setValue(false)
-
-      $('input[name="cF"]').prop('checked', false);
-
-    }
-  }
-
-  storePrograms() {
+    // Récupération des programmes et données pour les selects
     this.programs = this.programService.programs;
+    this.buildForm();
+
+    this.programService.getDateCompetitions().subscribe(d => this.dateComp = d);
+    this.programService.getNEtude().subscribe(n => this.nEtude = n);
   }
 
-  storeDateCompetition() {
-    this.dateComp = this.programService.dateComp;
-  }
-
-  storeNEtude() {
-    this.nEtude = this.programService.nEtdute;
-  }
-
-  addAdmissionForm() {
-    this.admissionForm = this.formBuilder.group({
-      program: ['Electricité naval', Validators.required],
-      concours: ['Concours du 12 Décembre 2022', Validators.required],
+  buildForm(): void {
+    this.admissionForm = this.fb.group({
+      program: [this.programs[0]?.name || '', Validators.required],
+      concours: ['', Validators.required],
       fname: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       ville: ['', Validators.required],
       sexe: ['F', Validators.required],
       age: ['', Validators.required],
-      diplome: ['Baccalauréat ou Equivalent', Validators.required],
+      diplome: ['', Validators.required],
       center: ['Yaoundé - Mballa 2', Validators.required],
-      cF: ['', Validators.required],
+      cF: [false, Validators.requiredTrue]
     });
   }
 
-  submitAdmission() {
-    $('.body-inner').hide();
-    $('#loading').css('visibility', 'visible');
+  submitAdmission(): void {
+    if (this.admissionForm.invalid) return;
 
+    this.loading = true;
 
-    let dateCreation = new Date()
+    // Prépare le payload exact pour le backend
+    const payload = {
+      ...this.admissionForm.value,
+      dateCreation: new Date().toISOString() // ISO format pour backend
+    };
 
-    let responseForm = this.admissionForm.value
+    // Appel au backend via le service
+    this.admissionService.addAdmission(payload).subscribe({
+      next: () => {
+        this.loading = false;
+        this.successMessage = true;
+        this.admissionConfirmation = true;
 
-    responseForm['dateCreation'] = dateCreation
+        // Réinitialiser le formulaire après succès
+        this.admissionForm.reset();
+        // Remet le sexe et centre par défaut après reset
+        this.admissionForm.patchValue({ sexe: 'F', center: 'Yaoundé - Mballa 2', cF: false });
 
-    this.http
-      .post<any[]>(`${this.baseUrl}/polytechnique/add-admission`, responseForm)
-      .subscribe(
-        (response) => {
-
-          $('#loading').css('visibility', 'hidden');
-          $('.body-inner').show();
-          $('.admission_success').show();
-          this.admissionForm.reset();
-
-          this.admissionConfirmation = !this.admissionConfirmation
-
-          setTimeout(function () {
-
-            $('.admission_success').hide();
-
-          }, 5000);
-
-        },
-        (error) => {
-          console.log('Erreur ! : ' + error);
-        }
-      );
-
-
+        // Masquer le message après 5 secondes
+        setTimeout(() => this.successMessage = false, 5000);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('Erreur soumission formulaire :', err);
+        alert('Erreur lors de l’envoi du formulaire. Veuillez réessayer plus tard.');
+      }
+    });
   }
-
 }

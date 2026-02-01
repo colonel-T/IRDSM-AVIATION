@@ -1,36 +1,42 @@
-<header id="header" data-transparent="true" class="dark submenu-light">
-    <div class="header-inner">
-        <div class="container">
-            <div id="logo"> <a href="index.html"><span class="logo-default">POLO</span><span
-                        class="logo-dark">POLO</span></a> </div>
+<!-- Header Aviation -->
+<header id="header" class="header-aviation fixed-top">
+  <div class="header-inner">
+    <div class="container d-flex align-items-center justify-content-between">
 
-            <div class="header-extras">
-                <ul>
-                    <li>
-                        <div class="p-dropdown"> <a href="#"><i class="icon-globe"></i><span>EN</span></a>
-                            <ul class="p-dropdown-content">
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">English</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+      <!-- Logo -->
+      <div id="logo" class="logo">
+        <a routerLink="/">
+          <img src="assets/images/logo-aviation.png" alt="IRDSM Aviation" />
+          <span class="logo-text">IRDSM Aviation</span>
+        </a>
+      </div>
 
-            <div id="mainMenu-trigger"> <a class="lines-button x"><span class="lines"></span></a> </div>
+      <!-- Navigation -->
+      <nav id="mainMenu" class="main-menu">
+        <ul>
+          <li><a routerLink="/" routerLinkActive="active">{{ 'menu.home' | translate }}</a></li>
+          <li><a routerLink="/formations" routerLinkActive="active">{{ 'menu.formations' | translate }}</a></li>
+          <li><a routerLink="/services" routerLinkActive="active">{{ 'menu.services' | translate }}</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active">{{ 'menu.contact' | translate }}</a></li>
+        </ul>
+      </nav>
 
-            <div id="mainMenu">
-                <div class="container">
-                    <nav>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index.html">Formations</a></li>
-                            <li><a href="index.html">Service</a></li>
-                            <li><a href="index.html">contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+      <!-- Extras -->
+      <div class="header-extras d-flex align-items-center">
+
+        <!-- Language switch -->
+        <div class="language-switch">
+          <button (click)="changeLang('fr')" [class.active]="currentLang === 'fr'">FR</button>
+          <button (click)="changeLang('en')" [class.active]="currentLang === 'en'">EN</button>
         </div>
+
+        <!-- Mobile menu trigger -->
+        <button class="mobile-nav-toggle" (click)="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+
     </div>
+  </div>
 </header>

@@ -31,134 +31,241 @@ export class ProgramsService {
   dateEvents = [
     {
       code: "200724",
-      name: "Évènement du 01 au 31 Août 2024",
+      name: "Événement prévu du 5 au 30 janvier 2026",
+    },
+    {
+      code: "200725",
+      name: "Événement prévu du 01 au 28 Février 2026",
+    },
+    {
+      code: "200726",
+      name: "Événement prévu du 01 au 28 Mars 2026",
+    },
+        {
+      code: "200727",
+      name: "Événement prévu du 01 au 25 Avril 2026",
+    },
+    {
+      code: "200728",
+      name: "Événement prévu du 01 au 30 Mai 2026",
+    },
+    {
+      code: "200729",
+      name: "Événement prévu du 01 au 27 Juin 2026",
+    },
+        {
+      code: "200730",
+      name: "Événement prévu du 01 au 25 Juillet 2026",
+    },
+    {
+      code: "200731",
+      name: "Événement prévu du 01 au 29 Août 2026",
+    },
+    {
+      code: "200732",
+      name: "Événement prévu du 01 au 26 Septembre 2026",
+    },
+        {
+      code: "200733",
+      name: "Événement prévu du 01 au 31 Octobre 2026",
+    },
+    {
+      code: "200734",
+      name: "Événement prévu du 01 au 28 Novembre 2026",
+    },
+    {
+      code: "200735",
+      name: "Événement prévu du 01 au 29 Décembre 2026",
     }
   ];
 
   programs = [
     {
-      name: "Hôtesse de l’air / stewards",
+      name: "Pilote d'Avion",
       duration: "12"
     },
     {
-      name: "Agent Technique d’Exploitation",
+      name: "Hôtesse de l’air / Stewards (PNC)",
       duration: "12"
     },
     {
-      name: "Douane Import / Export",
-      duration: "06"
-    },
-    {
-      name: "Informatique des systemes de contrôle",
+      name: "Agent Technique d’Exploitation (ATE)",
       duration: "12"
     },
     {
-      name: "Investissement et developpement",
-      duration: "004"
+      name: "Maintenance Aéronautique",
+      duration: "12"
     },
     {
-      name: "sécrétaires et cadres administratifs",
-      duration: "004"
+      name: "Systèmes Aéronautiques",
+      duration: "12"
+    },
+    {
+      name: "Informatique Industrielle / Intelligence Artificielle",
+      duration: "12"
+    },
+    {
+      name: "Ingénierie Aéronautique",
+      duration: "12"
     }, {
-      name: "Licence de pilote de ligne",
-      duration: "32"
+      name: "Gestion Des Opérations Aériennes",
+      duration: "12"
     },
     {
-      name: "Agent de passage escale aéroportuaire",
-      duration: "004"
+      name: "Opérateur Piste / Guide Aire Manoeuvre",
+      duration: "12"
     },
     {
-      name: "Superviseur et agent d’escale aéroportuaire",
-      duration: "004"
+      name: "Passage Sol : - Controle chargement  - Supervision chargement",
+      duration: "12"
     },
     {
-      name: "Passage sol",
-      duration: "004"
+      name: "Fret & Poste Aérien",
+      duration: "12"
     },
     {
-      name: "Agent d’accompagnement aéroportuaire de passagers à mobilité réduite",
-      duration: "03"
+      name: "Transitaire-Gestionnaire Fret Intermodal",
+      duration: "12"
     },
     {
-      name: "Agent Fret ; Import/Export ; Transitaire ; Magasinier",
-      duration: "03"
+      name: "Agent Passage Vente Billetterie Aérienne",
+      duration: "12"
     },
     {
-      name: "Spécialiste passage vente",
-      duration: "004"
+      name: "Entreprenariat Vente Billetterie Aérienne",
+      duration: "12"
     },
     {
-      name: "Agent billetterie",
-      duration: "03"
+      name: "Hôtesse Accueil & Assistance Aéroportuaire",
+      duration: "12"
     },
     {
-      name: "Hôtesse d’accueil",
-      duration: "004"
+      name: "Banque Finance & Gestion Business Aéronautique",
+      duration: "12"
     },
     {
-      name: "Spécialiste catering",
-      duration: "004"
+      name: "Entreprenariat Startup Aéronautique",
+      duration: "12"
     },
     {
-      name: "Agent litiges bagages",
-      duration: "004"
+      name: "Marketing Aeronautique",
+      duration: "12"
     },
     {
-      name: "Agent de voyage",
-      duration: "004"
+      name: "Comptabilité Matières & Gestion des Approvisionnements",
+      duration: "12"
     },
     {
-      name: "Conducteurs d’engins",
-      duration: "004"
+      name: "Douane Transit Intermodal",
+      duration: "12"
     },
     {
-      name: "Conducteurs push back",
-      duration: "004"
-    },
-    {
-      name: "Dégivreur",
-      duration: "004"
-    },
-    {
-      name: "Agents pistes",
-      duration: "004"
-    },
-    {
-      name: "Magasinier cariste",
-      duration: "004"
-    },
-    {
-      name: "Agent d’entretien et de nettoyage",
-      duration: "004"
-    },
-    {
-      name: "Supervision/ Contrôle",
-      duration: "004"
-    },
-    {
-      name: "Tourisme et loisirs",
-      duration: "004"
-    },
-    {
-      name: "Logistique et transport",
-      duration: "004"
+      name: "Marchandises Dangereuses (DGR)",
+      duration: "12"
     }
   ];
 
 
-
-  dateComp = [
+dateComp = [
     {
       code: "200724",
-      name: "18 Janvier 2025",
+      name: "24 Janvier 2026",
+    },
+    {
+      code: "200725",
+      name: "28 Février 2026",
+    },
+    {
+      code: "200726",
+      name: "28 Mars 2026",
+    },
+        {
+      code: "200727",
+      name: "25 Avril 2026",
+    },
+    {
+      code: "200728",
+      name: "30 Mai 2026",
+    },
+    {
+      code: "200729",
+      name: "27 Juin 2026",
+    },
+        {
+      code: "200730",
+      name: "25 Juillet 2026",
+    },
+    {
+      code: "200731",
+      name: "29 Août 2026",
+    },
+    {
+      code: "200732",
+      name: "26 Septembre 2026",
+    },
+        {
+      code: "200733",
+      name: "31 Octobre 2026",
+    },
+    {
+      code: "200734",
+      name: "28 Novembre 2026",
+    },
+    {
+      code: "200735",
+      name: "29 Décembre 2026",
     }
-  ];
+];
 
 
   listConcours = [
     {
       code: "200724",
-      name: "18 Janvier 2025",
+      name: "24 Janvier 2026",
+    },
+    {
+      code: "200725",
+      name: "28 Février 2026",
+    },
+    {
+      code: "200726",
+      name: "28 Mars 2026",
+    },
+        {
+      code: "200727",
+      name: "25 Avril 2026",
+    },
+    {
+      code: "200728",
+      name: "30 Mai 2026",
+    },
+    {
+      code: "200729",
+      name: "27 Juin 2026",
+    },
+        {
+      code: "200730",
+      name: "25 Juillet 2026",
+    },
+    {
+      code: "200731",
+      name: "29 Août 2026",
+    },
+    {
+      code: "200732",
+      name: "26 Septembre 2026",
+    },
+        {
+      code: "200733",
+      name: "31 Octobre 2026",
+    },
+    {
+      code: "200734",
+      name: "28 Novembre 2026",
+    },
+    {
+      code: "200735",
+      name: "29 Décembre 2026",
     }
   ];
 
@@ -177,7 +284,7 @@ export class ProgramsService {
 
   ];
 
-  nEtdute = [
+  nEtude = [
     {
       code: "M",
       name: "Master ou Equivalent",
@@ -213,7 +320,7 @@ export class ProgramsService {
   }
 
   emitnEtudeSubject() {
-    this.nEtudeSubject.next(this.nEtdute.slice());
+    this.nEtudeSubject.next(this.nEtude.slice());
   }
 
   emitEventsSubject() {
@@ -223,5 +330,13 @@ export class ProgramsService {
   emitDateEventsSubject() {
     this.dateEventsSubject.next(this.dateEvents.slice());
   }
+
+  // ...existing code...
+
+  // Add this method to provide date competitions
+  getDateCompetitions() {
+    return this.dateComp.slice();
+  }
+// ...existing code...
 
 }

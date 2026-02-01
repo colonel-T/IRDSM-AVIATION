@@ -126,7 +126,7 @@ export class CompetitionComponent {
   }
 
   storeNEtude() {
-    this.nEtude = this.programService.nEtdute;
+    this.nEtude = this.programService.nEtude;
   }
 
   addAdmissionForm() {

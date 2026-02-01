@@ -1,11 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+// Shared module
+import { SharedModule } from './shared/shared.module';
+
+// Composants
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './static/header/header.component';
-import { PartnerComponent } from './static/partner/partner.component';
+import { PartnersComponent } from './static/partner/partner.component';
 import { FooterComponent } from './static/footer/footer.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ServicesComponent } from './pages/services/services.component';
@@ -14,32 +22,38 @@ import { FourOhFourComponent } from './pages/four-oh-four/four-oh-four.component
 import { LanguageComponent } from './static/language/language.component';
 import { MenuComponent } from './static/menu/menu.component';
 import { ScrollTopComponent } from './static/scroll-top/scroll-top.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// import ngx-translate and the http loader
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LocaleService } from './services/locale.service';
 import { NewsletterComponent } from './pages/newsletter/newsletter.component';
 import { PiloteComponent } from './pages/pilote/pilote.component';
 import { PageTitleComponent } from './static/page-title/page-title.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolytechniqueComponent } from './pages/polytechnique/polytechnique.component';
 import { AdmissionPolytechniqueComponent } from './pages/polytechnique/admission-polytechnique/admission-polytechnique.component';
 import { FormationPolytechniqueComponent } from './pages/polytechnique/formation-polytechnique/formation-polytechnique.component';
 import { FormationComponent } from './pages/formation/formation.component';
 import { CompetitionComponent } from './pages/competition/competition.component';
-import { EventsService } from './services/events/events.service';
 import { EventsComponent } from './pages/events/events.component';
+
+// Services
+import { LocaleService } from './services/locale.service';
+import { EventsService } from './services/events/events.service';
+
+// ngx-translate
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+
+// AoT requires an exported function for factories  
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdmissionPolytechniqueComponent,
     HomeComponent,
     HeaderComponent,
-    PartnerComponent,
+    PartnersComponent,
     FooterComponent,
     AboutComponent,
     ServicesComponent,
@@ -52,12 +66,10 @@ import { EventsComponent } from './pages/events/events.component';
     PiloteComponent,
     PageTitleComponent,
     PolytechniqueComponent,
-    AdmissionPolytechniqueComponent,
     FormationPolytechniqueComponent,
     FormationComponent,
     CompetitionComponent,
-    EventsComponent,
-
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +78,7 @@ import { EventsComponent } from './pages/events/events.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule, // <-- AJOUTÉ pour que tous les composants voient translate
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -73,17 +86,11 @@ import { EventsComponent } from './pages/events/events.component';
         deps: [HttpClient]
       }
     })
-
-
   ],
   providers: [
-    LocaleService, EventsService
+    LocaleService,
+    EventsService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}

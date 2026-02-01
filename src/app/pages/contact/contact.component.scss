@@ -1,0 +1,104 @@
+/* Slider Full-Screen */
+.inspiro-slider.full-screen {
+  height: 100vh;
+  overflow: hidden;
+
+  .slide {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    animation: kenburns 30s ease-in-out infinite; // plus lent pour un effet subtil
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4); // un peu plus léger
+    }
+
+    .slide-captions {
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  }
+}
+
+/* Ken Burns Animation - subtil */
+@keyframes kenburns {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.03) translateY(-5px); } /* léger zoom et déplacement */
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Hover Scaling Effect */
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 90px; /* moved up from 30px to 90px */
+  right: 30px;
+  background-color: #25D366;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  text-align: center;
+  font-size: 30px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  }
+
+  i {
+    line-height: 60px;
+  }
+}
+
+
+#logo img {
+  transition: transform 0.3s;
+}
+#header {
+  box-shadow: none;
+}
+
+/* Section Padding */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+
+/* Calendly Modern Section */
+.calendly-container {
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
+}
+
+/* Card styling for Calendly widget */
+.card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Section padding */
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}

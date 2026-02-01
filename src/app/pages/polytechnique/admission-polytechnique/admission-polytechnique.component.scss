@@ -1,96 +1,108 @@
-#regForm {
-    background-color: #ffffff;
-    width: 100%;
-    min-width: 300px;
+/* FORM CONTAINER */
+.body-inner {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
-    text-align: center;
+/* Form Controls */
+.form-control {
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+
+  &:focus {
+    border-color: #004080;
+    box-shadow: 0 0 0 2px rgba(0, 64, 128, 0.2);
+  }
 }
 
-input {
-    padding: 10px;
-    width: 100%;
-    font-size: 17px;
-    font-family: Raleway;
-    border: 1px solid #aaaaaa;
-}
+/* Buttons */
+.btn {
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
 
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-    background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-    display: none;
-}
-
-button {
-    background-color: #04aa6d;
-    color: #ffffff;
+  &.btn-primary {
+    background-color: #004080;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-size: 17px;
-    font-family: Raleway;
-    cursor: pointer;
-}
+    &:hover { background-color: #0066cc; }
+    &:disabled { background-color: #7f9ebc; }
+  }
 
-button:hover {
-    opacity: 0.8;
-}
-
-#prevBtn {
-    background-color: #bbbbbb;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
+  &.btn-info {
+    background-color: #00aaff;
     border: none;
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
+    color: #fff;
+    &:hover { background-color: #00c0ff; }
+  }
+
+  &.btn-secondary {
+    background-color: #e0e0e0;
+    border: none;
+    color: #333;
+    &:hover { background-color: #c0c0c0; }
+  }
+
+  &.btn-dark {
+    background-color: #333;
+    color: #fff;
+    &:hover { background-color: #555; }
+  }
 }
 
-.step.active {
-    opacity: 1;
+/* Success Message */
+.admission_success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dff0d8;
+  color: #3c763d;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  i { margin-right: 0.5rem; }
 }
 
-/* Mark the steps that are finished and valid: */
-.step.finish {
-    background-color: #04aa6d;
+/* Spinner CSS premium */
+.spinner-css {
+  width: 80px;
+  height: 80px;
+  border: 10px solid #c0c0c0;
+  border-top: 10px solid #004080;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
 }
 
-#cF {
-    width: auto;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-#loading {
-    position: absolute;
-    left: 45%;
-    top: 45%;
-    visibility: hidden;
+/* Texte sous le spinner */
+.loading-text {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #004080;
+  text-align: center;
 }
 
-#slider {
-    height: 300px;
-}
-
+/* Confirmation Section */
 .admission_confirmation {
-    text-align: center;
-}
-.admission_confirmation .check {
-    width: 40px;
-}
-
-.admission_confirmation h2 {
-    color: #28a745;
-}
-
-#slider span {
-    font-size: 23px;
+  background: #f4f9ff;
+  padding: 2rem;
+  border-radius: 12px;
+  h2 { color: #004080; margin-bottom: 1rem; }
+  p { font-size: 1.1rem; color: #333; }
+  img.check { width: 80px; margin-bottom: 1rem; }
 }

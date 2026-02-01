@@ -10,19 +10,19 @@ export class GlobalConstants {
     public static version: string = "2.0.5";
 
     //year of current year
-    public static year: string = "2024";
+    //public static year: string = "2026";
 
     //email website
-    public static email: string = "campus@irdsm-aviation.com";
+    //public static email: string = "campus@irdsm-aviation.com";
 
     //name of websitz
     public static appname: string = "IRDSM AVIATION"
 
     //phone customer support
-    public static phone1: string = "(+237) 678 739 323"
-    public static phone2: string = "(+237) 690 362 956"
+    //public static phone1: string = "(+237) 678 739 323"
+    //public static phone2: string = "(+237) 690 362 956"
 
     //localisation of campus
-    public static localisation: string = "Cameroun, Yaoundé, Mballa2, Entrée Jamot, 1ère entrée à droite, Deuxième résidence";
+    //public static localisation: string = "Cameroun, Yaoundé, Mballa2, Entrée Jamot, 1ère entrée à droite, Deuxième résidence";
 
 }
