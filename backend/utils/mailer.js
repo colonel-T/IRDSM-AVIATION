@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   port: process.env.MAIL_PORT, // 587
   secure: false, // true si port 465
   auth: {
-    user: process.env.MAIL_USER, // ton email Brevo
+    user: process.env.MAIL_USER, // login SMTP Brevo
     pass: process.env.MAIL_PASS, // clé SMTP Brevo
   },
 });
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 // Envoi mail à l'admin
 exports.sendAdminMail = async (data) => {
   const mailOptions = {
-    from: `"Admission Polytechnique" <${process.env.MAIL_USER}>`,
+    from: `"IRDSM-AVIATION" <irdsmaviation1@gmail.com>`, // expéditeur modifié
     to: process.env.ADMIN_EMAIL,
     subject: 'Nouvelle admission Polytechnique',
     text: `
@@ -37,7 +37,7 @@ ${JSON.stringify(data, null, 2)}
 // Envoi mail au candidat
 exports.sendCandidateMail = async (data) => {
   const mailOptions = {
-    from: `"IFP Polytechnique" <${process.env.MAIL_USER}>`,
+    from: `"IRDSM-AVIATION" <irdsmaviation1@gmail.com>`, // expéditeur modifié
     to: data.email,
     subject: 'Confirmation de réception de votre admission',
     text: `Bonjour ${data.fname},
@@ -47,7 +47,7 @@ Nous avons bien reçu votre formulaire d’admission à l’IFP Polytechnique.
 Notre équipe vous contactera très prochainement.
 
 Cordialement,
-IFP Polytechnique`,
+IRDSM-AVIATION`,
   };
 
   return transporter.sendMail(mailOptions);
